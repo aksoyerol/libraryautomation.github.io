@@ -2,9 +2,9 @@ import { AuthorModel } from "./AuthorModel";
 import { BorrowBookModel } from "./BorrowBookModel";
 
 export interface BookModel{
-    Id:Number,
-    Name:String,
-    AuthorId:Number,
-    Author:AuthorModel,
-    BorrowBooks:BorrowBookModel[]
+    id:Number,
+    name:String,
+    authorId:Number,
+    author:AuthorModel,
+    borrowBooks:BorrowBookModel[]
 }
