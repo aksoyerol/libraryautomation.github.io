@@ -1,36 +1,80 @@
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Name</th>
-        <th scope="col">Operations</th>
+<div class="row">
+  <div class="col-md-6 float-left border border-primary pb-5">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Operations</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of books">
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm" (click)="delete(item.id)">
+              Edit
+            </button>
+            <button
+              class="btn btn-danger btn-sm ml-2"
+              (click)="delete(item.id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of books">
-        <td>{{item.id}}</td>
-        <td>{{item.name}}</td>
-        <td>
-            <button class="btn btn-primary btn-sm" (click)="delete(item.id)">Edit</button>
-        </td>
-        
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="col-md-6 user-container">
-    <h2 class="text-center">Add Book</h2>
-    <form [formGroup]="editForm" (ngSubmit)="addEntity()">
+  <div
+    class="col-md-6 user-container float-right pl-5 pr-5 border border-secondary"
+  >
+    <h2 class="text-center">Book Operations</h2>
+    <form [formGroup]="addForm" (ngSubmit)="addEntity()">
       <div class="form-group">
         <label for="name">Book Name : </label>
-        <input type="text" formControlName="name" placeholder="name" name="name" class="form-control" id="name">
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="name"
+          name="name"
+          class="form-control"
+          id="name"
+        />
+
+        <div
+          *ngIf="
+            addForm.controls['name'].invalid &&
+            (addForm.controls['name'].dirty || addForm.controls['name'].touched)
+          "
+          class="alert alert-danger"
+        >
+          <div *ngIf="addForm.controls['name'].errors">
+            Book name is required.
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="authorId">Author Id: </label>
-        <input type="text" formControlName="authorId" placeholder="authorId" name="authorId" class="form-control" id="authorId">
+      <div>
+        <label for="authorId">Author Name : </label>
+        <select formControlName="authorId">
+          <option [ngValue]="null" disabled>Select Author</option>
+          <option *ngFor="let item of authors" [ngValue]="item.id">
+            {{ item.name }}
+          </option>
+        </select>
       </div>
-  
-      <button class="btn btn-success">Add</button>
+      <!-- <p>Form value: {{ addForm.value | json }}</p>
+    <p>Form status: {{ addForm.status | json }}</p> -->
+
+      <button
+        class="btn btn-success btn-block mt-3"
+        type="submit"
+        [disabled]="addForm.pristine || addForm.invalid"
+      >
+        Save Changes
+      </button>
     </form>
   </div>
+</div>
