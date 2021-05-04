@@ -11,6 +11,10 @@ import {
 } from '@angular/forms';
 import { BorrowbookService } from 'src/services/borrowbook.service';
 import { BorrowBookModel } from 'src/Models/BorrowBookModel';
+import { BookModel } from 'src/Models/BookModel';
+import { UserModel } from 'src/Models/UserModel';
+import { BookService } from 'src/services/book.service';
+import { UserService } from 'src/services/user.service';
 @Component({
   selector: 'app-borrowbook',
   templateUrl: './borrowbook.component.html',
@@ -21,33 +25,40 @@ export class BorrowbookComponent implements OnInit {
   borrowBooks: BorrowBookModel[] = [];
   editForm!: FormGroup;
   updateEntity!: BorrowBookModel;
-
+  books: BookModel[] = [];
+  users : UserModel[] = []
   constructor(
     private service: BorrowbookService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private bookService : BookService,
+    private userService : UserService
+
   ) {
     const today = new Date();
     const month = today.getMonth();
     const year = today.getFullYear();
-
     this.addForm = new FormGroup({
       start: new FormControl(new Date(year, month, 13)),
-      end: new FormControl(new Date(year, month, 16)),
     });
+    this.createForm()
   }
 
   log() {
     console.log(this.addForm.value.start);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getAllUsers()
+    this.getAllBooks()
+  }
 
   createForm() {
     this.addForm = this.formBuilder.group({
       deliveryDate: ['', Validators.required],
-      receviedDate: ['', Validators.required],
-      
+      receivedDate: ['', Validators.required],
       id: [],
+      userId:[],
+      bookId:[]
     });
   }
 
@@ -59,8 +70,10 @@ export class BorrowbookComponent implements OnInit {
 
   edit(item: BorrowBookModel) {
     this.addForm.patchValue({
-      receviedDate: item.receivedDate,
+      receivedDate: item.receivedDate,
       deliveryDate: item.deliveryDate,
+      userId : item.userId,
+      bookId : item.bookId,
       id: item.id,
     });
     console.log('IDDD ' + this.addForm.value.id);
@@ -82,9 +95,23 @@ export class BorrowbookComponent implements OnInit {
 
   addEntity() {
     let model = this.addForm.value as BorrowBookModel;
+    model.receivedDate = this.addForm.value.start
+    model.deliveryDate= this.addForm.value.end
     this.service.addEntity(model).subscribe((response) => {
       console.log(response);
       this.fetchData();
     });
+  }
+
+  getAllUsers(){
+    this.userService.getAllEntity().subscribe(res=>{
+      this.users = res
+    })
+  }
+
+  getAllBooks(){
+    this.bookService.getDataFromApi().subscribe(res=>{
+      this.books = res
+    })
   }
 }
