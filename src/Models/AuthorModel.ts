@@ -1,8 +1,8 @@
 import { BookModel } from "./BookModel";
 
 export interface AuthorModel{
-    Id:Number,
-    Name:String,
-    LastName:String,
-    Books:BookModel[]
+    id:Number,
+    name:String,
+    lastName:String,
+    books:BookModel[]
 }

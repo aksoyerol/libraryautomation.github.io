@@ -1,11 +1,11 @@
 import { BorrowBookModel } from "./BorrowBookModel";
 
 export interface UserModel{
-    Id:Number,
-    Name:String,
-    LastName:String,
-    Adress:String,
-    PhoneNumber:String,
-    Email:String,
-    BorrowBooks:BorrowBookModel[]
+    id:Number,
+    name:String,
+    lastName:String,
+    adress:String,
+    phoneNumber:String,
+    email:String,
+    borrowBooks:BorrowBookModel[]
 }
