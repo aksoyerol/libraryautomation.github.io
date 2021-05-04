@@ -8,7 +8,7 @@ import {
   FormsModule,
   Validators,
 } from '@angular/forms';
-import { AuthorService } from 'src/services/author-service.service';
+import { AuthorService } from 'src/services/author.service';
 import { AuthorModel } from 'src/Models/AuthorModel';
 
 @Component({
@@ -69,8 +69,6 @@ export class HomeComponent implements OnInit {
         this.fetchData()
       })
       console.log(this.updateEntity)
-
-    
   }
 
   addEntity() {

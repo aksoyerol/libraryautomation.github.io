@@ -1,3 +1,4 @@
+
 <div class="row">
   <div class="col-md-6 float-left border border-primary pb-5">
     <table class="table">
@@ -20,8 +21,7 @@
             </button>
             <button
               class="btn btn-danger btn-sm ml-2"
-              (click)="delete(item.id)"
-            >
+              (click)="delete(item.id)">
               Delete
             </button>
           </td>
@@ -31,8 +31,7 @@
   </div>
 
   <div
-    class="col-md-6 user-container float-right pl-5 pr-5 border border-secondary"
-  >
+    class="col-md-6 user-container float-right pl-5 pr-5 border border-secondary" >
     <h2 class="text-center">Book Operations</h2>
     <form [formGroup]="addForm" >
       <input type="hidden" name="id" id="id" type="text" [hidden]="true" formControlName="id"/>
@@ -89,4 +88,7 @@
     </button>
     </form>
   </div>
+  <a routerLink="/author" routerLinkActive="active">Second Component</a>
 </div>
+
+<router-outlet></router-outlet>
