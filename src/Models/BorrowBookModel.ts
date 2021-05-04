@@ -3,8 +3,8 @@ import { UserModel } from "./UserModel";
 
 export interface BorrowBookModel{
     id:Number,
-    receivedDate:Date,
-    deliveryDate:Date,
+    receivedDate:String,
+    deliveryDate:String,
     userId:Number,
     user:UserModel,
     bookId:Number,

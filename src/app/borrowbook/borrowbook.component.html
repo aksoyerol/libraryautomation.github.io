@@ -42,6 +42,8 @@
         <mat-label>Choose Received Date</mat-label>
         <input
           matInput
+          formControlName="receivedDate"
+          
           [matDatepicker]="datepickers"
           name="receivedDate"
           id="receivedDate"
@@ -65,8 +67,8 @@
         <mat-label>Choose Delivery Date</mat-label>
         <input
           matInput
+          formControlName="deliveryDate"
           [matDatepicker]="datepicker"
-
           name="deliveryDate"
           class="block"
           id="deliveryDate"

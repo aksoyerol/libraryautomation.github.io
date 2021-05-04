@@ -21,12 +21,14 @@ import { UserService } from 'src/services/user.service';
   styleUrls: ['./borrowbook.component.css'],
 })
 export class BorrowbookComponent implements OnInit {
-  addForm: FormGroup;
+  addForm!: FormGroup;
   borrowBooks: BorrowBookModel[] = [];
   editForm!: FormGroup;
   updateEntity!: BorrowBookModel;
   books: BookModel[] = [];
   users : UserModel[] = []
+
+ 
   constructor(
     private service: BorrowbookService,
     private formBuilder: FormBuilder,
@@ -37,9 +39,7 @@ export class BorrowbookComponent implements OnInit {
     const today = new Date();
     const month = today.getMonth();
     const year = today.getFullYear();
-    this.addForm = new FormGroup({
-      start: new FormControl(new Date(year, month, 13)),
-    });
+   
     this.createForm()
   }
 
@@ -94,9 +94,9 @@ export class BorrowbookComponent implements OnInit {
   }
 
   addEntity() {
-    let model = this.addForm.value as BorrowBookModel;
-    model.receivedDate = this.addForm.value.start
-    model.deliveryDate= this.addForm.value.end
+   
+    console.log("BU TARİH" + this.addForm.value.receivedDate)
+    let model = this.addForm.value as BorrowBookModel
     this.service.addEntity(model).subscribe((response) => {
       console.log(response);
       this.fetchData();
