@@ -49,6 +49,7 @@ export class BorrowbookComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllUsers()
+    this.fetchData();
     this.getAllBooks()
   }
 

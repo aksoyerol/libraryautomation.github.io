@@ -4,17 +4,21 @@
       <thead>
         <tr>
           <th scope="col">Id</th>
-          <th scope="col">Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Phone</th>
-          <th scope="col">Adress</th>
+          <th scope="col">UserName - UserId</th>
+          <th scope="col">BookName - BookId</th>
+          <th scope="col">ReceivedDate</th>
+          <th scope="col">DeliveryDate</th>
+          
           <th scope="col">Operations</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of borrowBooks">
           <td>{{ item.id }}</td>
+          <td>{{ item.user.name}} - {{item.user.id}}</td>
+          <td>{{ item.book.name}} - {{item.book.id}}</td>
+          <td>{{ item.receivedDate | date: 'dd/MM/yyyy'}}</td>
+          <td>{{ item.deliveryDate |  date: 'dd/MM/yyyy'}}</td>
 
           <td>
             <button class="btn btn-primary btn-sm" (click)="edit(item)">
