@@ -39,14 +39,10 @@ export class BorrowbookComponent implements OnInit {
     const today = new Date();
     const month = today.getMonth();
     const year = today.getFullYear();
-   
     this.createForm()
   }
 
-  log() {
-    console.log(this.addForm.value.start);
-  }
-
+ 
   ngOnInit(): void {
     this.getAllUsers()
     this.fetchData();
@@ -86,12 +82,13 @@ export class BorrowbookComponent implements OnInit {
       console.log(data);
     });
   }
+
   editEntity() {
     this.service.getEntity(this.addForm.value.id).subscribe((response) => {});
     this.service.updateEntity(this.addForm.value).subscribe((res) => {
       this.fetchData();
     });
-    console.log(this.updateEntity);
+    console.log("Updating entity = " + (this.addForm.value as BorrowBookModel));
   }
 
   addEntity() {

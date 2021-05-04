@@ -40,7 +40,8 @@
     class="col-md-6 user-container float-right pl-5 pr-5 border border-secondary pb-5"
   >
     <form [formGroup]="addForm"> 
-      <h2 class="text-center">User Operations</h2>
+      <input type="hidden" name="id" id="id" type="text" [hidden]="true" formControlName="id"/>
+      <h2 class="text-center">Borrow Operations</h2>
       
       <mat-form-field appearance="fill" class="example-form-field">
         <mat-label>Choose Received Date</mat-label>

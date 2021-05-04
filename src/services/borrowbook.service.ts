@@ -26,10 +26,10 @@ export class BorrowbookService {
     });
   }
 
-  updateEntity(BorrowBookModel : NewType){
-    const body = JSON.stringify(BorrowBookModel);
-    console.log(body);
-    return this.http.put(this.BaseURL + "borrowbooks/",body,{
+  updateEntity(model : BorrowBookModel){
+    const body = JSON.stringify(model);
+    console.log("BorrowBookService ********* " +body);
+    return this.http.put(this.BaseURL + "borrowbooks",body,{
       headers : { 'content-type': 'application/json' }
     });
   }
