@@ -20,19 +20,15 @@ export class HomeComponent implements OnInit {
   books: BookModel[] = [];  
   editForm!: FormGroup;
   authors : AuthorModel[] = [];
-
   addForm!: FormGroup;
-  
+  updateEntity !: BookModel
   constructor(private service: BookService, private formBuilder: FormBuilder, private authorService : AuthorService) {
     this.createForm();
   
   }
- 
-
   ngOnInit(): void {
     this.fetchData();
     this.getAllAuthors();
-    console.log(this.books);
   }
  
   fetchData() {
@@ -45,16 +41,36 @@ export class HomeComponent implements OnInit {
   createForm() {
      this.addForm = this.formBuilder.group({
        name: ['', Validators.required ],
-       authorId: ['', Validators.required ]
+       authorId: ['', Validators.required ],
+       id :[]
     });
   }
-
-
 
   delete(id: Number) {
     this.service.deleteEntity(id).subscribe(() => {
       this.fetchData();
     });
+  }
+
+  edit(item:BookModel){
+    this.addForm.patchValue({
+      name: item.name,
+      id:item.id,
+      authorId : item.authorId
+    })
+    console.log("IDDD " +this.addForm.value.id)
+  }
+  
+  editEntity(){
+     this.service.getEntity(this.addForm.value.id).subscribe(response=>{
+       
+      })
+      this.service.updateEntity(this.addForm.value).subscribe(res=>{
+        this.fetchData()
+      })
+      console.log(this.updateEntity)
+
+    
   }
 
   addEntity() {

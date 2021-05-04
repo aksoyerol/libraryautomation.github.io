@@ -5,6 +5,7 @@
         <tr>
           <th scope="col">Id</th>
           <th scope="col">Name</th>
+          <th scope="col">Author</th>
           <th scope="col">Operations</th>
         </tr>
       </thead>
@@ -12,8 +13,9 @@
         <tr *ngFor="let item of books">
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
+          <td>{{ item.author.name}}</td>
           <td>
-            <button class="btn btn-primary btn-sm" (click)="delete(item.id)">
+            <button class="btn btn-primary btn-sm" (click)="edit(item)">
               Edit
             </button>
             <button
@@ -32,7 +34,8 @@
     class="col-md-6 user-container float-right pl-5 pr-5 border border-secondary"
   >
     <h2 class="text-center">Book Operations</h2>
-    <form [formGroup]="addForm" (ngSubmit)="addEntity()">
+    <form [formGroup]="addForm" >
+      <input type="hidden" name="id" id="id" type="text" [hidden]="true" formControlName="id"/>
       <div class="form-group">
         <label for="name">Book Name : </label>
         <input
@@ -70,11 +73,20 @@
 
       <button
         class="btn btn-success btn-block mt-3"
+        (click)="addEntity()"
         type="submit"
         [disabled]="addForm.pristine || addForm.invalid"
       >
-        Save Changes
+        Save
       </button>
+      <button
+      class="btn btn-primary btn-block mt-3"
+      type="submit"
+      (click)="editEntity()"
+      [disabled]="addForm.pristine || addForm.invalid"
+    >
+      Update
+    </button>
     </form>
   </div>
 </div>

@@ -24,4 +24,17 @@ export class BookService {
       headers : { 'content-type': 'application/json' }
     });
   }
+
+  updateEntity(bookModel : BookModel){
+    const headerss = new Headers({ 'content-type': 'application/json' });
+    const body = JSON.stringify(bookModel);
+    console.log(body);
+    return this.http.put("https://localhost:5001/api/books/",body,{
+      headers : { 'content-type': 'application/json' }
+    });
+  }
+
+  getEntity(id : Number){
+    return this.http.get<BookModel>('https://localhost:5001/api/books/getBookById/' + id);
+  }
 }
